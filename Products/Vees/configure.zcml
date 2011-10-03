@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="Products.Vees">
+
+  <class class=".Vee.Vee">
+    <require
+      permission="zope2.View"
+      interface=".interfaces.IVee"
+    />
+    <require
+      permission="cmf.ModifyPortalContent"
+      set_schema=".interfaces.IVee"
+    />
+  </class>
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <cmf:registerDirectory name="Vees" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Vees"
+      directory="profiles/default"
+      description="Installs the Products.Vees package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <!-- -*- extra stuff goes here -*- -->
+  
+</configure>

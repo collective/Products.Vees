@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  lang="en"
+  metal:use-macro="context/main_template/macros/master"
+  i18n:domain="Products.Vees">
+
+<metal:javascript fill-slot="javascript_head_slot">
+
+  <script type="text/javascript" charset="utf-8">
+  jq(document).ready(function(){
+    jq('img.image-right,img.image-left,img.image-inline')
+    .prepOverlay({
+        subtype: 'image',
+        urlmatch: '/image/.+$',
+        urlreplace: '/image/large'
+        });
+  })
+  </script>
+
+</metal:javascript>
+
+
+  <body>
+    <metal:main fill-slot="main">
+      <tal:main-macro metal:define-macro="main" 
+          tal:define="pprops context/portal_properties;
+                      site_props pprops/site_properties;
+                      inline python: site_props.getProperty('enable_inline_editing', False);">
+
+<table tal:condition="python:1" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="3" width="80%" style="background-color: #dddddd" align="center">
+
+<tal:block tal:content="structure python:here.renderFieldValue(here.getTop(), inline)">
+First field</tal:block>
+
+</td>
+</tr>
+<tr>
+<td colspan="1" style="border-top: thin solid black"></td>
+<!--td style="border-left: thin solid black; border-right: thin solid black; border-bottom: thin solid black; background-color: #dddddd; width=30; height=400" rowspan="2" valign="top"-->
+<td style="width=30; height=400"
+  rowspan="2" valign="top">
+<img src="vee.png" width="130" height="850" style="padding: 0; margin: 0;" />
+</td>
+<td colspan="1" style="border-top: thin solid black"></td>
+</tr>
+<tr>
+<td valign="top">
+<table width="100%">
+<tr tal:repeat="row here/getLeftArm">
+<td tal:content="structure python:here.renderFieldValue(row, inline)"></td>
+</tr>
+</table>
+</td>
+<td valign="top">
+<table width="100%">
+<tr tal:repeat="row here/getRightArm">
+<td tal:content="structure python:here.renderFieldValue(row, inline)"></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr tal:repeat="row here/getBottom">
+<td colspan="3" align="center"
+  tal:content="structure python:here.renderFieldValue(row, inline)">Bottom field</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td align="right" colspan="1">
+<h2>Student scientists</h2>
+<tal:block tal:repeat="cont here/Contributors">
+<tal:block tal:replace="cont"/><br />
+</tal:block>
+</td>
+</tr>
+</table>
+
+        <div metal:use-macro="here/document_relateditems/macros/relatedItems">
+            show related items if they exist
+        </div>
+    
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
+

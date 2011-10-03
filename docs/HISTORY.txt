@@ -1,0 +1,11 @@
+Changelog
+=========
+
+1.0
+---
+
+ - Initial Plone 3/4 Release
+
+ - inline editing respects site setting
+
+ - use plone.app.jquerytools to do image pop-up
