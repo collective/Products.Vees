@@ -15,7 +15,7 @@
  <property name="allow_discussion">False</property>
  <property name="default_view">vee_view</property>
  <property name="view_methods">
-  <element value="view_view"/>
+  <element value="vee_view"/>
  </property>
  <property name="default_view_fallback">True</property>
  <alias from="(Default)" to="(dynamic view)"/>
