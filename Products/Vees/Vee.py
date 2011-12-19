@@ -15,6 +15,7 @@ from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.configuration import zconf
 from Products.Archetypes.ExtensibleMetadata import ExtensibleMetadata
 from Products.Vees.interfaces import IVee
+from Products.ATContentTypes.lib.historyaware import HistoryAwareMixin
 
 try:  # New CMF
     from Products.CMFCore import permissions as CMFCorePermissions
@@ -102,7 +103,7 @@ for field in FIELDS:
          ))
 
 
-class Vee(ATCTContent):
+class Vee(ATCTContent, HistoryAwareMixin):
     implements(IVee)
 
     schema = schema
