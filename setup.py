@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0.4'
+version = '2.0a1'
 
 setup(name='Products.Vees',
       version=version,
@@ -17,7 +17,7 @@ setup(name='Products.Vees',
       keywords='',
       author='Nathan Van Gheem',
       author_email='vangheem@gmail.com',
-      url='http://svn.plone.org/svn/collective/',
+      url='https://github.com/collective/Products.Vees',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
@@ -25,7 +25,13 @@ setup(name='Products.Vees',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'plone.app.jquerytools'
+          'plone.app.jquerytools',
+          'plone.app.dexterity',
+          'collective.z3cform.datagridfield',
+          'plone.app.textfield',
+          'plone.directives.form',
+          'plone.autoform',
+          'plone.directives.dexterity'
       ],
       entry_points="""
       # -*- Entry points: -*-

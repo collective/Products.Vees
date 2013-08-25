@@ -5,20 +5,11 @@
   xmlns:cmf="http://namespaces.zope.org/cmf"
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
   xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:grok="http://namespaces.zope.org/grok"
   i18n_domain="Products.Vees">
 
-  <class class=".Vee.Vee">
-    <require
-      permission="zope2.View"
-      interface=".interfaces.IVee"
-    />
-    <require
-      permission="cmf.ModifyPortalContent"
-      set_schema=".interfaces.IVee"
-    />
-  </class>
-
-  <five:registerPackage package="." initialize=".initialize" />
+  <include package="five.grok" />
+  <grok:grok package="." />
 
   <cmf:registerDirectory name="Vees" />
 
@@ -36,7 +27,30 @@
     for="*"
     permission="zope2.View"
     template="vee-view.pt"
-    class=".views.VeeView"
+    class=".views.OldVeeView"
     />
-  
+
+<browser:page
+       for="Products.CMFCore.interfaces._content.ISiteRoot"
+       name="manage-vee-templates"
+       class=".controlpanel.VeeListing"
+       permission="cmf.ManagePortal"
+       template="templates/template-listing.pt"
+       />
+<browser:page
+       for="Products.CMFCore.interfaces._content.ISiteRoot"
+       name="edit-vee-template"
+       class=".controlpanel.VeeForm"
+       permission="cmf.ManagePortal"
+       />
+
+   <include file="upgrades.zcml" />
+
+   <utility
+    component=".vocabularies.TemplatesVocabularyFactory"
+    name="Products.Vees.vocabularies.templates"
+    />
+
+
+
 </configure>

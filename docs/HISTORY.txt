@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.0a1 ~ (unreleased)
+--------------------
+
+- move to dexterity
+
+- new template manager
+
+
 1.0.4 ~ (2011-12-20)
 --------------------
 

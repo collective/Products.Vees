@@ -1,0 +1,14 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:gs="http://namespaces.zope.org/genericsetup"
+  i18n_domain="Products.Vees">
+        
+  <gs:upgradeStep
+    title="Upgrade Vees to 2.0"
+    description="Products.Vees upgrade step"
+    source="*"
+    destination="2000"
+    handler=".upgrades.upgrade20"
+    profile="Products.Vees:default"/>
+</configure>
+

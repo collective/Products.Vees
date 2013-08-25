@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xml:lang="en" lang="en"
+      tal:omit-tag=""
+      metal:define-macro="controlpanel"
+      i18n:domain="plone">
+
+<metal:block use-macro="context/prefs_main_template/macros/master">
+
+<body>
+
+<metal:main fill-slot="prefs_configlet_main">
+
+    <metal:form metal:define-macro="form">
+
+        <metal:block define-macro="header">
+
+            <dl tal:define="status view/status|nothing"
+                 tal:condition="status"
+                 class="portalMessage info"
+                 tal:attributes="class python: view.errors and 'portalMessage error' or 'portalMessage info'">
+                <dt i18n:translate="">
+                    Info
+                </dt>
+                <dd tal:content="view/status" />
+            </dl>
+        </metal:block>
+
+            <a href=""
+               id="setup-link"
+               tal:attributes="href string:$portal_url/plone_control_panel"
+               i18n:translate="">
+                Site Setup
+            </a>
+
+        <h1 class="documentFirstHeading"
+            i18n:translate=""
+            tal:condition="view/label"
+            tal:content="view/label"
+            metal:define-slot="heading">
+            Do something
+        </h1>
+
+        <div class="documentDescription" i18n:translate=""
+           tal:condition="view/description"
+           tal:content="view/description">
+            Description
+        </div>
+
+        <div id="content-core">
+          <table class="listing">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            <tal:items tal:repeat="template python: view.storage">
+              <tr>
+                <td>
+                  <form tal:attributes="action string:${context/absolute_url}/manage-vee-templates" method="POST">
+                    <input type="hidden" name="index" tal:attributes="value python: repeat['template'].index" />
+                    <input type="submit" name="duplicate" value="Duplicate" />
+                  </form>
+                <td>
+                  <a tal:attributes="href string:${context/absolute_url}/edit-vee-template?index=${repeat/template/index}"
+                     tal:condition="python: repeat['template'].index != 0">Edit</a>
+                   <p tal:replace="template/title" />
+                </td>
+                <td>
+                  <form tal:attributes="action string:${context/absolute_url}/manage-vee-templates" method="POST"
+                        tal:condition="python: repeat['template'].index != 0">
+                    <input type="hidden" name="index" tal:attributes="value python: repeat['template'].index" />
+                    <input type="submit" name="delete" value="Delete" />
+                  </form>
+                </td>
+              </tr>
+            </tal:items>
+          </tbody>
+          </table>
+
+        </div>
+
+    </metal:form>
+
+</metal:main>
+</body>
+
+</metal:block>
+</html>
+
